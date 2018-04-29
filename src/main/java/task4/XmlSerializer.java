@@ -3,7 +3,10 @@ package task4;
 import nodes.DrawNode;
 import sample.DemoImages;
 
+import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
+import java.io.StringWriter;
 
 public class XmlSerializer {
 
@@ -11,15 +14,20 @@ public class XmlSerializer {
         System.out.println(serializeToXml(DemoImages.DEMO_IMAGE));
     }
 
+    /**
+     * Serializes the draw node tree to corresponding XML structure.
+     */
     public static String serializeToXml(DrawNode node) throws XMLStreamException {
-        //XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
-        //StringWriter stringWriter = new StringWriter();
-        //XMLStreamWriter xml = xmlOutputFactory.createXMLStreamWriter(stringWriter);
-        //xml.writeStartDocument();
+        // set up StAX as streaming XML writer
+        XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
+        StringWriter stringWriter = new StringWriter();
+        XMLStreamWriter xml = xmlOutputFactory.createXMLStreamWriter(stringWriter);
+        xml.writeStartDocument();
 
-        throw new UnsupportedOperationException("Not implemented");
+        // TODO: implement using visitor
+        // HINT: xml.writeStartElement, xml.writeAttribute, xml.writeEndElement
 
-        //xml.writeEndDocument();
-        //return stringWriter.toString();
+        xml.writeEndDocument();
+        return stringWriter.toString();
     }
 }

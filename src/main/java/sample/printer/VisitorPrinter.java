@@ -17,6 +17,9 @@ public class VisitorPrinter {
         printDrawNode(DemoImages.DEMO_IMAGE, System.out);
     }
 
+    /**
+     * Prints the draw node tree.
+     */
     public static void printDrawNode(DrawNode node, PrintStream out) {
         PrintVisitor printVisitor = new PrintVisitor(out);
         node.accept(printVisitor);

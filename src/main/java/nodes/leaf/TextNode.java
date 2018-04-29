@@ -2,6 +2,9 @@ package nodes.leaf;
 
 import nodes.DrawVisitor;
 
+/**
+ * Represents a line of text.
+ */
 public class TextNode extends LeafNode {
 
     private final String text;

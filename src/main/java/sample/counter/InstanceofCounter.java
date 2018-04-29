@@ -11,6 +11,9 @@ public class InstanceofCounter {
         System.out.println(countNodes(DemoImages.DEMO_IMAGE));
     }
 
+    /**
+     * Counts all nodes in the draw node tree.
+     */
     public static int countNodes(DrawNode node) {
         int count = 0;
 

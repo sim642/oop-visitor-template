@@ -6,6 +6,12 @@ import nodes.leaf.CircleNode;
 import nodes.leaf.RectangleNode;
 import nodes.leaf.TextNode;
 
+/**
+ * Visits a {@link DrawNode} with default behavior.
+ * Leaves do nothing. Composites delegate to children.
+ *
+ * Override only needed methods.
+ */
 public class SimpleDrawVisitor implements DrawVisitor {
     @Override
     public void visit(RectangleNode rectangle) {

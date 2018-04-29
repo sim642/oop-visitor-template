@@ -5,6 +5,9 @@ import nodes.DrawVisitor;
 
 import java.util.List;
 
+/**
+ * Represents a group of nodes.
+ */
 public class GroupNode extends DrawNode {
 
     private final List<DrawNode> children;

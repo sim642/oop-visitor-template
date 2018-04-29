@@ -2,6 +2,9 @@ package nodes.leaf;
 
 import nodes.DrawNode;
 
+/**
+ * Represents a leaf node with position.
+ */
 public abstract class LeafNode extends DrawNode {
 
     private final int x;

@@ -3,6 +3,9 @@ package nodes.composite;
 import nodes.DrawNode;
 import nodes.DrawVisitor;
 
+/**
+ * Represents the entire image.
+ */
 public class ImageNode extends DrawNode {
 
     private final DrawNode child;

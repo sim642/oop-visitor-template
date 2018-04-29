@@ -2,6 +2,9 @@ package nodes.leaf;
 
 import nodes.DrawVisitor;
 
+/**
+ * Represents a circle.
+ */
 public class CircleNode extends LeafNode {
 
     private final int radius;

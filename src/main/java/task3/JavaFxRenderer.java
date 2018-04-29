@@ -29,7 +29,11 @@ public class JavaFxRenderer extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Renders the image represented by the draw node tree onto the given {@link GraphicsContext}.
+     */
     public static void render(GraphicsContext gc, DrawNode node) {
+        // TODO: implement using visitor
         throw new UnsupportedOperationException("Not implemented");
     }
 }

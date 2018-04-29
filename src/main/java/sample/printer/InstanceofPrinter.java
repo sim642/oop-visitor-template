@@ -16,6 +16,9 @@ public class InstanceofPrinter {
         printDrawNode(DemoImages.DEMO_IMAGE, System.out);
     }
 
+    /**
+     * Prints the draw node tree.
+     */
     public static void printDrawNode(DrawNode node, PrintStream out) {
         if (node instanceof RectangleNode) {
             out.print("Rectangle");

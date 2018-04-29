@@ -2,6 +2,9 @@ package nodes.leaf;
 
 import nodes.DrawVisitor;
 
+/**
+ * Represents a rectangle.
+ */
 public class RectangleNode extends LeafNode {
 
     private final int width;

@@ -6,6 +6,9 @@ import nodes.leaf.CircleNode;
 import nodes.leaf.RectangleNode;
 import nodes.leaf.TextNode;
 
+/**
+ * Visits a {@link DrawNode}.
+ */
 public interface DrawVisitor {
     void visit(RectangleNode rectangle);
     void visit(CircleNode circle);
