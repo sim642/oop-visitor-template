@@ -1,4 +1,4 @@
-package sample;
+package sample.counter;
 
 import nodes.DrawNode;
 import nodes.SimpleDrawVisitor;
@@ -7,8 +7,9 @@ import nodes.composite.ImageNode;
 import nodes.leaf.CircleNode;
 import nodes.leaf.RectangleNode;
 import nodes.leaf.TextNode;
+import sample.DemoImages;
 
-public class NodeCounter {
+public class VisitorCounter {
 
     public static void main(String[] args) {
         System.out.println(countNodes(DemoImages.DEMO_IMAGE));

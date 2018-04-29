@@ -46,7 +46,7 @@ The next two approaches avoid these issues by implementing desired algorithms ou
 ### `instanceof` and casts
 Secondly, operations may be implemented using if statements with `instanceof` conditions to differentiate different types. In the respective branches of such if statements, the object of the general type can be safely cast into a more specific type safely, after having checked it.
 
-`InstanceOfPrintDemo` has an example of printing the node structure via this approach.
+`InstanceofPrinter` has an example of printing the node structure and `InstanceofCounter` has an example of counting nodes via this approach.
 
 It also has several downsides:
 
