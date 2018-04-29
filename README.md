@@ -131,3 +131,6 @@ Among those are the composite and visitor patterns. Others you might have knowin
 * [template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern).
 
 While you shouldn't resort to these possibly sophisticated patterns to solve every object-oriented design issue, being aware of their existence might become handy, especially while reading other people's advanced code that makes use of such patterns.
+
+## Tasks
+[This repository](https://github.com/sim642/oop-visitor-template) contains some tasks (in suitable packages) that can be solved by implementing a suitable visitor. Study the `DrawNode` hierarchy, the examples in `sample` package and tests to solve the tasks.
