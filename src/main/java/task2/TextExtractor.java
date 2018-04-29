@@ -1,8 +1,11 @@
 package task2;
 
 import nodes.DrawNode;
+import nodes.SimpleDrawVisitor;
+import nodes.leaf.TextNode;
 import sample.DemoImages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TextExtractor {
@@ -15,7 +18,18 @@ public class TextExtractor {
      * Extracts the texts of all Text nodes from the draw node tree into a list.
      */
     public static List<String> extractTexts(DrawNode node) {
-        // TODO: implement using visitor
-        throw new UnsupportedOperationException("Not implemented");
+        TextVisitor textVisitor = new TextVisitor();
+        node.accept(textVisitor);
+        return textVisitor.texts;
+    }
+
+    private static class TextVisitor extends SimpleDrawVisitor {
+
+        private final List<String> texts = new ArrayList<>();
+
+        @Override
+        public void visit(TextNode text) {
+            texts.add(text.getText());
+        }
     }
 }
