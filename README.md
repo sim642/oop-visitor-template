@@ -56,5 +56,55 @@ It also has several downsides:
 The next approach avoids these issues by introducing a significantly more sophisticated system.
 
 ### Visitor pattern
+Thirdly, there is the visitor pattern. `FileVisitor`, used for `Files.walkFileTree`, also is one example of the visitor pattern that exists in JDK. We look at the pattern more classically on a data structure, not the file tree.
 
-TODO
+#### How it's created? 
+It allows implementing operations by implementing a visitor interface (`DrawVisitor`) which contains a method overload for every concrete node type:
+```java
+public interface DrawVisitor {
+    void visit(RectangleNode rectangle);
+    void visit(CircleNode circle);
+    void visit(TextNode text);
+    void visit(GroupNode group);
+    void visit(ImageNode image);
+}
+```
+
+The abstract node base class (`DrawNode`) will have an additional abstract method for accepting a visitor:
+```java
+public abstract void accept(DrawVisitor visitor);
+```
+Every concrete subclass implements this in a very simple manner:
+```java
+@Override
+public void accept(DrawVisitor visitor) {
+    visitor.visit(this);
+}
+```
+The implementation is exactly the same in every subclass intentionally because it cannot be implemented directly in the superclass!
+
+An implementation of the visitor interface with corresponding actions for every node type can be passed to a node's `accept` method to run the algorithm over the data structure. `VisitorPrinter` has a corresponding example of printing the node structure and `VisitorCounter` has a corresponding example of counting nodes via this approach.
+
+The latter extends the `SimpleDrawVisitor` class instead of implementing the `DrawVisitor` interface directly. It contains a reasonable default behavior (doing nothing for leaves, delegating to children for composites) to simplify creating new visitors.
+Note that no `instanceof` nor casts are required when implementing an algorithm.
+
+#### How it works?
+The visitor pattern works through **double-dispatch**. When `accept` is called on a node with a visitor, two calls are dispatched:
+
+1. The implementation of `accept` that runs is found using dynamic dispatch from the node's actual class, which overrides the `accept` method.
+2. The implementation of `visit` that runs is found using overloading based on the node's actual class, which calls `visitor.visit(this)`. Because every class implements this on their own, the type of `this` is specifically that class and thus the desired overloaded version of `visit` can be run on the visitor. 
+  This is why `accept` needs to be identically implemented in all the subclasses. If it were implemented in the superclass, the type of `this` would be the superclass type, which is insufficient to decide, which `visit` overload needs to be called. In fact, it wouldn't even compile.
+
+#### Pros & cons
+Visitor pattern allows implementing any number of algorithms on the same data structure without resorting to undesired `instanceof` and casting by adding exactly one method to the data classes. Thus it solves all the issues described above with previous approaches.
+
+The pattern doesn't, however, come without its cons:
+
+1. It is significantly more complicated than the other approaches, both in its creation and working mechanism.
+2. it isn't always neater to implement a visitor, especially when multiple types need to be treated the same, e.g. in `VisitorCounter` class.
+
+Still, the visitor pattern and other visitor-like patterns are widely preferred when dealing with hierarchical and tree structures consisting of elements of different types. 
+In addition to specific application data structures, it's also used more generally, for example:
+* Navigating directory and file trees.
+* Parsing XML efficiently by streaming.
+* Manipulating (abstract) syntax trees of programs in compiler construction.
