@@ -120,3 +120,14 @@ In addition to specific application data structures, it's also used more general
 * Navigating directory and file trees.
 * Parsing XML efficiently by streaming.
 * Manipulating (abstract) syntax trees of programs in compiler construction.
+
+## Design patterns
+There is a very famous software engineering book called ["Design Patterns"](https://en.wikipedia.org/wiki/Design_Patterns) by the so-called **Gang of Four** (GoF) that describes 23 such design patterns.
+Among those are the composite and visitor patterns. Others you might have knowingly or unknowingly used are:
+* [adapter pattern](https://en.wikipedia.org/wiki/Adapter_pattern),
+* [decorator pattern](https://en.wikipedia.org/wiki/Decorator_pattern),
+* [chain-of-responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern),
+* [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern),
+* [template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern).
+
+While you shouldn't resort to these possibly sophisticated patterns to solve every object-oriented design issue, being aware of their existence might become handy, especially while reading other people's advanced code that makes use of such patterns.
