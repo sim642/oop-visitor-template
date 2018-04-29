@@ -15,7 +15,7 @@ public class InstanceofCounter {
      * Counts all nodes in the draw node tree.
      */
     public static int countNodes(DrawNode node) {
-        int count = 0;
+        int count = 1;
 
         if (node instanceof GroupNode) {
             GroupNode group = (GroupNode) node;
