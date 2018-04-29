@@ -1,4 +1,4 @@
-package sample;
+package sample.printer;
 
 import nodes.DrawNode;
 import nodes.composite.GroupNode;
@@ -7,6 +7,7 @@ import nodes.leaf.CircleNode;
 import nodes.leaf.RectangleNode;
 import nodes.leaf.TextNode;
 import org.junit.Test;
+import sample.TestImages;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public abstract class PrintDemoTest {
+public abstract class PrinterTest {
 
     protected abstract void printDrawNode(DrawNode node, PrintStream out);
 

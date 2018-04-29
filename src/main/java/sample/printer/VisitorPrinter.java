@@ -1,4 +1,4 @@
-package sample;
+package sample.printer;
 
 import nodes.DrawNode;
 import nodes.DrawVisitor;
@@ -7,10 +7,11 @@ import nodes.composite.ImageNode;
 import nodes.leaf.CircleNode;
 import nodes.leaf.RectangleNode;
 import nodes.leaf.TextNode;
+import sample.DemoImages;
 
 import java.io.PrintStream;
 
-public class VisitorPrintDemo {
+public class VisitorPrinter {
 
     public static void main(String[] args) {
         printDrawNode(DemoImages.DEMO_IMAGE, System.out);

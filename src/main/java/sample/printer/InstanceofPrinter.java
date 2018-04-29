@@ -1,4 +1,4 @@
-package sample;
+package sample.printer;
 
 import nodes.DrawNode;
 import nodes.composite.GroupNode;
@@ -6,10 +6,11 @@ import nodes.composite.ImageNode;
 import nodes.leaf.CircleNode;
 import nodes.leaf.RectangleNode;
 import nodes.leaf.TextNode;
+import sample.DemoImages;
 
 import java.io.PrintStream;
 
-public class InstanceofPrintDemo {
+public class InstanceofPrinter {
 
     public static void main(String[] args) {
         printDrawNode(DemoImages.DEMO_IMAGE, System.out);

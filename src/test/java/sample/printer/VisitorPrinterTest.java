@@ -1,13 +1,13 @@
-package sample;
+package sample.printer;
 
 import nodes.DrawNode;
 
 import java.io.PrintStream;
 
-public class InstanceofPrintDemoTest extends PrintDemoTest {
+public class VisitorPrinterTest extends PrinterTest {
 
     @Override
     protected void printDrawNode(DrawNode node, PrintStream out) {
-        InstanceofPrintDemo.printDrawNode(node, out);
+        VisitorPrinter.printDrawNode(node, out);
     }
 }
