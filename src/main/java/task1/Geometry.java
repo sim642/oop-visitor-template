@@ -14,7 +14,10 @@ public class Geometry {
      * Rectangles and Circles have area and should be counted, others don't.
      */
     public static double calculateTotalArea(DrawNode node) {
-        // TODO: implement using visitor
+        // TODO: implement a visitor
+        // HINT: it only needs to do something useful for rectangles and circles
+        // TODO: create the visitor
+        // TODO: make node accept the visitor
         throw new UnsupportedOperationException("Not implemented");
     }
 }
