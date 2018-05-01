@@ -25,8 +25,10 @@ public class XmlSerializer {
         xml.writeStartDocument();
 
         // TODO: implement using visitor
-        // HINT: xml.writeStartElement, xml.writeAttribute, xml.writeEndElement
+        // HINT: xml.writeStartElement, xml.writeEmptyElement, xml.writeAttribute, xml.writeCharacters, xml.writeEndElement
+        // HINT: look at XmlDemo class for an example
 
+        // finish XML writing
         xml.writeEndDocument();
         return stringWriter.toString();
     }
