@@ -53,7 +53,7 @@ The next two approaches avoid these issues by implementing desired algorithms ou
 Secondly, operations may be implemented using if statements with `instanceof` conditions to differentiate different types.
 In the respective branches of such if statements, the object of the general type can be safely cast into a more specific type safely, after having checked it.
 
-`InstanceofPrinter` has an example of printing the node structure and `InstanceofCounter` has an example of counting nodes via this approach.
+**`InstanceofPrinter` has an example of printing the node structure and `InstanceofCounter` has an example of counting nodes via this approach.**
 
 It also has several downsides:
 1. Using `instanceof` and casting is considered bad style in object-oriented programming because nicer and intended techniques are not being utilized. They are also rather verbose.
@@ -66,14 +66,18 @@ Thirdly, there is the visitor pattern. `FileVisitor`, used for `Files.walkFileTr
 We look at the pattern more classically on a data structure, not the file tree.
 
 #### Setup 
-It allows implementing operations by implementing a visitor interface (`DrawVisitor`) which contains a method overload for every concrete node type:
+It allows implementing operations by implementing a visitor interface (`DrawVisitor`) which contains a method overload(s) for every concrete node type:
 ```java
 public interface DrawVisitor {
     void visit(RectangleNode rectangle);
     void visit(CircleNode circle);
     void visit(TextNode text);
-    void visit(GroupNode group);
-    void visit(ImageNode image);
+    
+    void preVisit(GroupNode group);
+    void postVisit(GroupNode group);
+    
+    void preVisit(ImageNode image);
+    void postVisit(ImageNode image);
 }
 ```
 
@@ -81,28 +85,29 @@ The abstract node base class (`DrawNode`) will have an additional abstract metho
 ```java
 public abstract void accept(DrawVisitor visitor);
 ```
-Every concrete subclass implements this in a very simple manner:
+Every concrete leaf node class implements this in a very simple manner:
 ```java
 @Override
 public void accept(DrawVisitor visitor) {
     visitor.visit(this);
 }
 ```
-The implementation is exactly the same in every subclass intentionally because it cannot be implemented directly in the superclass!
+Composite node classes do it similarly by calling `preVisit` and `postVisit` and sending the visitor to their children in between, so the whole structure automatically gets visited.
+The implementation is pretty much the same in every subclass intentionally because it cannot be implemented directly in the superclass!
 _This is explained below._
 
 An implementation of the visitor interface with corresponding actions for every node type can be passed to a node's `accept` method to run the algorithm over the data structure. 
-`VisitorPrinter` has a corresponding example of printing the node structure and `VisitorCounter` has a corresponding example of counting nodes via this approach.
+**`VisitorPrinter` has a corresponding example of printing the node structure and `VisitorCounter` has a corresponding example of counting nodes via this approach.**
 
 The latter extends the `SimpleDrawVisitor` class instead of implementing the `DrawVisitor` interface directly.
-It contains a reasonable default behavior (doing nothing for leaves, delegating to children for composites) to simplify creating new visitors.
+It contains a reasonable default behavior to simplify creating new visitors where not all methods need to do something special.
 Note that no `instanceof` nor casts are required when implementing an algorithm.
 
 #### Working mechanism
 The visitor pattern works through **double-dispatch**.
 When `accept` is called on a node with a visitor, two calls are dispatched:
 1. The implementation of `accept` that runs is found using dynamic dispatch from the node's actual class, which overrides the `accept` method.
-2. The implementation of `visit` that runs is found using overloading based on the node's actual class, which calls `visitor.visit(this)`.
+2. The implementation of `visit` (or `preVisit`/`postVisit`) that runs is found using overloading based on the node's actual class, which calls `visitor.visit(this)`.
     Because every class implements this on their own, the type of `this` is specifically that class and thus the desired overloaded version of `visit` can be run on the visitor. 
     This is why `accept` needs to be identically implemented in all the subclasses. If it were implemented in the superclass, the type of `this` would be the superclass type, which is insufficient to decide, which `visit` overload needs to be called.
     _In fact, it wouldn't even compile._
@@ -118,8 +123,18 @@ The pattern doesn't, however, come without its cons:
 Still, the visitor pattern and other visitor-like patterns are widely preferred when dealing with hierarchical and tree structures consisting of elements of different types. 
 In addition to specific application data structures, it's also used more generally, for example:
 * Navigating directory and file trees.
-* Parsing XML efficiently by streaming.
+* Parsing and writing XML efficiently by streaming.
 * Manipulating (abstract) syntax trees of programs in compiler construction.
+
+#### Variations
+The visitor pattern implementation used here is only one out of many possible variants.
+Different possibilities may include
+* iterating children in `visit` methods instead of `accept` methods,
+* returning something from `visit` methods,
+* passing extra arguments to `accept` and `visit` methods.
+
+The different variants have usually are more flexible but also more complex.
+What features are needed from a visitor depends on the specific algorithms and applications.
 
 ## Design patterns
 There is a very famous software engineering book called ["Design Patterns"](https://en.wikipedia.org/wiki/Design_Patterns) by the so-called **Gang of Four** (GoF) that describes 23 such design patterns.
