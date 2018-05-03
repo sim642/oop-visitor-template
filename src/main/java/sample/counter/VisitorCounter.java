@@ -44,15 +44,13 @@ public class VisitorCounter {
         }
 
         @Override
-        public void visit(GroupNode group) {
+        public void preVisit(GroupNode group) {
             count++;
-            super.visit(group);
         }
 
         @Override
-        public void visit(ImageNode image) {
+        public void preVisit(ImageNode image) {
             count++;
-            super.visit(image);
         }
     }
 }

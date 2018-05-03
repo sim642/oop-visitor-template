@@ -18,7 +18,9 @@ public class GroupNode extends DrawNode {
 
     @Override
     public void accept(DrawVisitor visitor) {
-        visitor.visit(this);
+        visitor.preVisit(this);
+        children.forEach(child -> child.accept(visitor));
+        visitor.postVisit(this);
     }
 
     public List<DrawNode> getChildren() {

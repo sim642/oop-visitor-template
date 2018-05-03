@@ -14,6 +14,9 @@ public interface DrawVisitor {
     void visit(CircleNode circle);
     void visit(TextNode text);
 
-    void visit(GroupNode group);
-    void visit(ImageNode image);
+    void preVisit(GroupNode group);
+    void postVisit(GroupNode group);
+
+    void preVisit(ImageNode image);
+    void postVisit(ImageNode image);
 }

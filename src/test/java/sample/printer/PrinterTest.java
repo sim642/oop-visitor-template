@@ -31,31 +31,40 @@ public abstract class PrinterTest {
 
     @Test
     public void testRectangle() throws Exception {
-        assertPrint("Rectangle", new RectangleNode(0, 0, 1, 1));
+        assertPrint("Rectangle\n", new RectangleNode(0, 0, 1, 1));
     }
 
     @Test
     public void testCircle() throws Exception {
-        assertPrint("Circle", new CircleNode(0, 0, 1));
+        assertPrint("Circle\n", new CircleNode(0, 0, 1));
     }
 
     @Test
     public void testText() throws Exception {
-        assertPrint("Text", new TextNode(0, 0, "a"));
+        assertPrint("Text\n", new TextNode(0, 0, "a"));
     }
 
     @Test
     public void testGroup() throws Exception {
-        assertPrint("Group(Rectangle,Circle)", new GroupNode(List.of(new RectangleNode(0, 0, 1, 1), new CircleNode(0, 0, 1))));
+        assertPrint("Group\n" +
+                "  Rectangle\n" +
+                "  Circle\n", new GroupNode(List.of(new RectangleNode(0, 0, 1, 1), new CircleNode(0, 0, 1))));
     }
 
     @Test
     public void testImage() throws Exception {
-        assertPrint("Image(Rectangle)", new ImageNode(new RectangleNode(0, 0, 1, 1)));
+        assertPrint("Image\n" +
+                "  Rectangle\n", new ImageNode(new RectangleNode(0, 0, 1, 1)));
     }
 
     @Test
     public void testDemoImage() throws Exception {
-        assertPrint("Image(Group(Rectangle,Group(Circle,Text),Text))", TestImages.DEMO_IMAGE);
+        assertPrint("Image\n" +
+                "  Group\n" +
+                "    Rectangle\n" +
+                "    Group\n" +
+                "      Circle\n" +
+                "      Text\n" +
+                "    Text\n", TestImages.DEMO_IMAGE);
     }
 }

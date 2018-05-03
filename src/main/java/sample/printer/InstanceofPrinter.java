@@ -20,30 +20,33 @@ public class InstanceofPrinter {
      * Prints the draw node tree.
      */
     public static void printDrawNode(DrawNode node, PrintStream out) {
+        printDrawNode(node, out, 0);
+    }
+
+    private static void printDrawNode(DrawNode node, PrintStream out, int indent) {
         if (node instanceof RectangleNode) {
-            out.print("Rectangle");
+            printWithIndent(out, indent, "Rectangle");
         }
         else if (node instanceof CircleNode) {
-            out.print("Circle");
+            printWithIndent(out, indent, "Circle");
         }
         else if (node instanceof TextNode) {
-            out.print("Text");
+            printWithIndent(out, indent, "Text");
         }
         else if (node instanceof GroupNode) {
             GroupNode group = (GroupNode) node;
-            out.print("Group(");
-            for (int i = 0; i < group.getChildren().size(); i++) {
-                if (i > 0)
-                    out.print(",");
-                printDrawNode(group.getChildren().get(i), out);
-            }
-            out.print(")");
+            printWithIndent(out, indent, "Group");
+            for (DrawNode child : group.getChildren())
+                printDrawNode(child, out, indent + 1);
         }
         else if (node instanceof ImageNode) {
             ImageNode image = (ImageNode) node;
-            out.print("Image(");
-            printDrawNode(image.getChild(), out);
-            out.print(")");
+            printWithIndent(out, indent, "Image");
+            printDrawNode(image.getChild(), out, indent + 1);
         }
+    }
+
+    private static void printWithIndent(PrintStream out, int indent, String str) {
+        out.println(StringUtils.repeat("  ", indent) + str);
     }
 }

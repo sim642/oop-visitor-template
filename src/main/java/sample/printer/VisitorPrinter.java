@@ -28,6 +28,7 @@ public class VisitorPrinter {
     private static class PrintVisitor implements DrawVisitor {
 
         private final PrintStream out;
+        private int indent = 0;
 
         public PrintVisitor(PrintStream out) {
             this.out = out;
@@ -35,35 +36,43 @@ public class VisitorPrinter {
 
         @Override
         public void visit(RectangleNode rectangle) {
-            out.print("Rectangle");
+            printWithIndent("Rectangle");
         }
 
         @Override
         public void visit(CircleNode circle) {
-            out.print("Circle");
+            printWithIndent("Circle");
         }
 
         @Override
         public void visit(TextNode text) {
-            out.print("Text");
+            printWithIndent("Text");
         }
 
         @Override
-        public void visit(GroupNode group) {
-            out.print("Group(");
-            for (int i = 0; i < group.getChildren().size(); i++) {
-                if (i > 0)
-                    out.print(",");
-                group.getChildren().get(i).accept(this);
-            }
-            out.print(")");
+        public void preVisit(GroupNode group) {
+            printWithIndent("Group");
+            indent++;
         }
 
         @Override
-        public void visit(ImageNode image) {
-            out.print("Image(");
-            image.getChild().accept(this);
-            out.print(")");
+        public void postVisit(GroupNode group) {
+            indent--;
+        }
+
+        @Override
+        public void preVisit(ImageNode image) {
+            printWithIndent("Image");
+            indent++;
+        }
+
+        @Override
+        public void postVisit(ImageNode image) {
+            indent--;
+        }
+
+        private void printWithIndent(String str) {
+            out.println(StringUtils.repeat("  ", indent) + str);
         }
     }
 }

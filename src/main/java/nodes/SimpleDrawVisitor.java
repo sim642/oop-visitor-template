@@ -8,7 +8,6 @@ import nodes.leaf.TextNode;
 
 /**
  * Visits a {@link DrawNode} with default behavior.
- * Leaves do nothing. Composites delegate to children.
  *
  * Override only needed methods.
  */
@@ -29,12 +28,22 @@ public class SimpleDrawVisitor implements DrawVisitor {
     }
 
     @Override
-    public void visit(GroupNode group) {
-        group.getChildren().forEach(child -> child.accept(this));
+    public void preVisit(GroupNode group) {
+
     }
 
     @Override
-    public void visit(ImageNode image) {
-        image.getChild().accept(this);
+    public void postVisit(GroupNode group) {
+
+    }
+
+    @Override
+    public void preVisit(ImageNode image) {
+
+    }
+
+    @Override
+    public void postVisit(ImageNode image) {
+
     }
 }

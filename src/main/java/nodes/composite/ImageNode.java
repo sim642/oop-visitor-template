@@ -16,7 +16,9 @@ public class ImageNode extends DrawNode {
 
     @Override
     public void accept(DrawVisitor visitor) {
-        visitor.visit(this);
+        visitor.preVisit(this);
+        child.accept(visitor);
+        visitor.postVisit(this);
     }
 
     public DrawNode getChild() {
