@@ -14,6 +14,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 import java.io.StringWriter;
 
+import static task4.RunnableThrows.wrapThrows;
+
 public class XmlSerializer {
 
     public static void main(String[] args) throws XMLStreamException {
@@ -51,83 +53,54 @@ public class XmlSerializer {
 
         @Override
         public void visit(RectangleNode rectangle) {
-            try {
+            wrapThrows(() -> {
                 xml.writeEmptyElement("rectangle");
                 xml.writeAttribute("x", Integer.toString(rectangle.getX()));
                 xml.writeAttribute("y", Integer.toString(rectangle.getY()));
                 xml.writeAttribute("width", Integer.toString(rectangle.getWidth()));
                 xml.writeAttribute("height", Integer.toString(rectangle.getHeight()));
-            }
-            catch (XMLStreamException e) {
-                throw new RuntimeException(e);
-            }
+            });
         }
 
         @Override
         public void visit(CircleNode circle) {
-            try {
+            wrapThrows(() -> {
                 xml.writeEmptyElement("circle");
                 xml.writeAttribute("x", Integer.toString(circle.getX()));
                 xml.writeAttribute("y", Integer.toString(circle.getY()));
                 xml.writeAttribute("radius", Integer.toString(circle.getRadius()));
-            }
-            catch (XMLStreamException e) {
-                throw new RuntimeException(e);
-            }
+            });
         }
 
         @Override
         public void visit(TextNode text) {
-            try {
+            wrapThrows(() -> {
                 xml.writeStartElement("text");
                 xml.writeAttribute("x", Integer.toString(text.getX()));
                 xml.writeAttribute("y", Integer.toString(text.getY()));
                 xml.writeCharacters(text.getText());
                 xml.writeEndElement();
-            }
-            catch (XMLStreamException e) {
-                throw new RuntimeException(e);
-            }
+            });
         }
 
         @Override
         public void preVisit(GroupNode group) {
-            try {
-                xml.writeStartElement("group");
-            }
-            catch (XMLStreamException e) {
-                throw new RuntimeException(e);
-            }
+            wrapThrows(() -> xml.writeStartElement("group"));
         }
 
         @Override
         public void postVisit(GroupNode group) {
-            try {
-                xml.writeEndElement();
-            }
-            catch (XMLStreamException e) {
-                throw new RuntimeException(e);
-            }
+            wrapThrows(xml::writeEndElement);
         }
 
         @Override
         public void preVisit(ImageNode image) {
-            try {
-                xml.writeStartElement("image");
-            }
-            catch (XMLStreamException e) {
-                throw new RuntimeException(e);
-            }
+            wrapThrows(() -> xml.writeStartElement("image"));
         }
 
         @Override
         public void postVisit(ImageNode image) {
-            try {
-                xml.writeEndElement();
-            }
-            catch (XMLStreamException e) {
-                throw new RuntimeException(e);
-            }
+            wrapThrows(xml::writeEndElement);
         }
     }
 }
