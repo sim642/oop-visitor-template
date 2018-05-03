@@ -15,6 +15,7 @@ public class VisitorPrinter {
 
     public static void main(String[] args) {
         printDrawNode(DemoImages.DEMO_IMAGE, System.out);
+        //printDrawNode(DemoImages.DEMO_GROUP, System.out);
     }
 
     /**

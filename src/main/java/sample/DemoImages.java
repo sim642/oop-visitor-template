@@ -20,4 +20,9 @@ public class DemoImages {
                     new TextNode(30, 100, "My cool image")
             ))
     );
+
+    public static final GroupNode DEMO_GROUP = new GroupNode(List.of(
+            new CircleNode(150, 30, 20),
+            new TextNode(200, 50, "Some text")
+    ));
 }

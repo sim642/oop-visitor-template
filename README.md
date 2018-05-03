@@ -112,6 +112,27 @@ When `accept` is called on a node with a visitor, two calls are dispatched:
     This is why `accept` needs to be identically implemented in all the subclasses. If it were implemented in the superclass, the type of `this` would be the superclass type, which is insufficient to decide, which `visit` overload needs to be called.
     _In fact, it wouldn't even compile._
 
+##### Detailed example
+When running the following in `VisitorPrinter`
+```java
+printDrawNode(DemoImages.DEMO_GROUP, System.out);
+```
+these things happen:
+1. Visitor created (indent = 0).
+2. `GroupNode#accept` called:
+    1. `preVisit(GroupNode)` called:
+        1. `Group` printed (indent = 0).
+        2. Indent increased (indent = 1).
+    2. `CircleNode#accept` called:
+        1. `visit(CircleNode)` called:
+            1. `  Circle` printed (indent = 1).
+    3. `TextNode#accept` called:
+        1. `visit(TextNode)` called:
+            1. `  Text` printed (indent = 1).
+    4. `postVisit(GroupNode)` called:
+        1. Indent decreased (indent = 0).
+    
+
 #### Pros & cons
 Visitor pattern allows implementing any number of algorithms on the same data structure without resorting to undesired `instanceof` and casting by adding exactly one method to the data classes.
 Thus it solves all the issues described above with previous approaches.
