@@ -92,7 +92,7 @@ public void accept(DrawVisitor visitor) {
     visitor.visit(this);
 }
 ```
-Composite node classes do it similarly by calling `preVisit` and `postVisit` and sending the visitor to their children in between, so the whole structure automatically gets visited.
+Composite node classes do it similarly by calling `preVisit` and `postVisit` and sending the visitor to their children in between, so **the whole structure automatically gets visited**.
 The implementation is pretty much the same in every subclass intentionally because it cannot be implemented directly in the superclass!
 _This is explained below._
 
@@ -132,10 +132,14 @@ these things happen:
     4. `postVisit(GroupNode)` called:
         1. Indent decreased (indent = 0).
     
+**You should also try running the visitor examples under the debugger and step through them to see first-hand how things run.**
 
 #### Pros & cons
 Visitor pattern allows implementing any number of algorithms on the same data structure without resorting to undesired `instanceof` and casting by adding exactly one method to the data classes.
 Thus it solves all the issues described above with previous approaches.
+
+It also is simpler in the sense, that the visitor (specifically the `accept` methods) send the visitor to child nodes automatically, so this doesn't need to be done when implementing such visiting algorithm.
+This is great since we don't need to worry about the complex internal structure of the nodes if we don't want to and can only care about some specific nodes, like rectangles.
 
 The pattern doesn't, however, come without its cons:
 1. It is significantly more complicated than the other approaches, both in its setup and working mechanism.
