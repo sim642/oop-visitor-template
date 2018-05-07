@@ -34,6 +34,8 @@ public class JavaFxRenderer extends Application {
      */
     public static void render(GraphicsContext gc, DrawNode node) {
         // TODO: implement using visitor
+        // HINT: take inspiration from VisitorPrinter
+        // HINT: pass GraphicsContext to the visitor via constructor argument (like out in VisitorPrinter)
         throw new UnsupportedOperationException("Not implemented");
     }
 }

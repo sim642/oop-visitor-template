@@ -16,6 +16,7 @@ public class TextExtractor {
      */
     public static List<String> extractTexts(DrawNode node) {
         // TODO: implement using visitor
+        // HINT: take inspiration from VisitorCounter
         throw new UnsupportedOperationException("Not implemented");
     }
 }
